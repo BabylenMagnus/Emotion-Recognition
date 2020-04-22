@@ -27,7 +27,6 @@ class SimpleCNN(nn.Module):
         self.pred = nn.Sequential(
 
             nn.Linear(1152, 512),
-            nn.BatchNorm2d(512),
             nn.ReLU(),
             nn.Dropout(.2),
 
