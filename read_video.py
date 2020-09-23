@@ -1,8 +1,12 @@
 import cv2
-import numpy as np
 import torch
 from torchvision import transforms
+import argparse
 
+
+parser = argparse.ArgumentParser()
+parser.add_argument('video', default='Jojo Rabbit - Gestapo Scene (Heil Hitler).mp4')
+arg = parser.parse_args()
 
 cascade_classifier = cv2.CascadeClassifier(r'haarcascade/haarcascade_frontalface_default.xml')
 transform = transforms.Resize(48)
@@ -44,7 +48,7 @@ def format_image(image):
 thunderstorm = torch.load('EmotionClassificationCNN.4500', map_location=torch.device('cpu'))
 
 # i'm apologize for my variable names
-video_capture = cv2.VideoCapture(r'Jojo Rabbit - Gestapo Scene (Heil Hitler).mp4')
+video_capture = cv2.VideoCapture(arg.video)
 
 while True:
     ret, frame = video_capture.read()
@@ -64,17 +68,6 @@ while True:
             cv2.rectangle(frame, (130, index * 20 + 10),
                           (130 + int(result[0][index] * 100), (index + 1) * 20 + 4),
                           (132, 222, 2), -1)
-
-        # x, y, w, h = face
-        # cv2.rectangle(frame, (x, y), (x + w, y + h), (132, 222, 2), 2)
-
-        # face_image = feelings_faces[np.argmax(result[0])]
-
-        # Ugly transparent fix
-        # for c in range(0, 3):
-        #     frame[200:320, 10:130, c] = face_image[:, :, c] * \
-        #                                 (face_image[:, :, 3] / 255.0) + frame[200:320, 10:130, c] \
-        #                                 * (1.0 - face_image[:, :, 3] / 255.0)
 
     # Display the resulting frame
     cv2.imshow('Video', frame)
