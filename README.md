@@ -4,7 +4,7 @@
 
 Program play video with emotion in rectangle in left top angle.
 
-<img src="exampl1.png" width="512">
+<img src="examp1.png" width="512">
 <img src="example2.png" width="512">
 
 ## Training
